@@ -3,13 +3,15 @@ from django.db import models
 
 # Create your models here.
 class Proyecto(models.Model):
+    id_siga = models.IntegerField()
     nombre = models.CharField(max_length=100)
-    sigla = models.CharField(max_length=10)
+    sigla = models.CharField(max_length=50)
     anio = models.IntegerField()
-    descripcion = models.TextField()
-    fecha_inicio = models.DateField()
-    fecha_fin = models.DateField()
+    descripcion = models.TextField(blank=True, null=True)
+    fecha_inicio = models.DateField(blank=True, null=True)
+    fecha_fin = models.DateField(blank=True, null=True)
     cod_meta = models.CharField(max_length=8)
+    estado = models.IntegerField(default=1)
     usr_creacion = models.CharField(max_length=100, blank=True, null=True)
     fec_creacion = models.DateTimeField(blank=True, null=True)
     usr_edicion = models.CharField(max_length=100, blank=True, null=True)
@@ -19,6 +21,7 @@ class Proyecto(models.Model):
     class Meta:
         managed = True
         db_table = 'PROYECTO'
+        unique_together = (('id_siga',))
 
 
 class Sistema(models.Model):

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .serializer import *
 from rest_framework.views import APIView
 from rest_framework import generics, viewsets
+from .models import ProyectosSiga
 
 
 # Create your views here.
@@ -60,3 +61,10 @@ class ModuloPermisoRolUsuarioViewSet(viewsets.ModelViewSet):
 class TipoUsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = TipoUsuarioSerializer
     queryset = TipoUsuario.objects.all()
+
+
+def getProyectosSiga(request):
+    proyectos = list(Proyecto.objects.values_list('id_siga', flat=True))
+    proyectos_disponibles = ProyectosSiga.objects.using('consecucion').exclude(id__in=proyectos).values()
+
+    return JsonResponse(list(proyectos_disponibles), safe=False)

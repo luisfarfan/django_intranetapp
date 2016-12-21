@@ -120,6 +120,12 @@
 <script type="text/javascript" src="{% static "assets/js/core/libraries/jquery.min.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/js/core/libraries/bootstrap.min.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/js/core/app.min.js" %}"></script>
+<script>
+    var pathArray = location.href.split('/');
+    var protocol = pathArray[0];
+    var host = pathArray[2];
+    BASE_URL = protocol + '//' + host;
+</script>
 <!-- /core JS files -->
 {% block js %}
 {% endblock %}

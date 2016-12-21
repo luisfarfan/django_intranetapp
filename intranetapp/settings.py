@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api_rest',
     'rest_framework',
     'authentication',
     'seguridad'
@@ -77,7 +78,28 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'segmentacion': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'CPV_SEGMENTACION',
+        'USER': 'us_segmentacion_web',
+        'PASSWORD': 'u$s3g*mentaWeB',
+        'HOST': '172.18.1.41',
+        'OPTIONS': {
+            'driver': 'SQL Server',
+        },
+    },
+    'consecucion': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'INEI_BDRRHH_CONSECUCION',
+        'USER': 'rvila',
+        'PASSWORD': 'inei1202',
+        'HOST': '192.168.200.250',
+        'OPTIONS': {
+            'driver': 'SQL Server',
+            'unicode_results': True,
+        },
+    },
 }
 
 # Password validation

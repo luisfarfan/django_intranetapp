@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('authentication.urls', namespace='authentication')),
     url(r'^seguridad/', include('seguridad.urls', namespace='seguridad')),
+    url(r'^rest/', include('api_rest.urls', namespace='api_rest')),
 ]

@@ -1,5 +1,7 @@
 from rest_framework import routers
 from .views import *
+from django.conf.urls import url
+from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioViewSet)
@@ -15,3 +17,8 @@ router.register(r'usuarios_detalle', ModuloPermisoRolUsuarioViewSet)
 router.register(r'tipo_usuario', TipoUsuarioViewSet)
 
 # router.register(r'pea_cursocriterio', PEA_CURSOCRITERIOViewSet)
+
+
+urlpatterns = [
+    url(r'getProyectosSiga', getProyectosSiga),
+]
