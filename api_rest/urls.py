@@ -21,4 +21,5 @@ router.register(r'tipo_usuario', TipoUsuarioViewSet)
 
 urlpatterns = [
     url(r'getProyectosSiga', getProyectosSiga),
+    url(r'saveProyectoSistema', saveProyectoSistema),
 ]

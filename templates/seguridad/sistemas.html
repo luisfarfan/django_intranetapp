@@ -5,7 +5,7 @@
 {% block content %}
     <div class="panel panel-primary panel-bordered">
         <div class="panel-heading">
-            <h5 class="panel-title">PROYECTOS SIGA</h5>
+            <h5 class="panel-title">SISTEMAS</h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li>
@@ -20,65 +20,23 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <select id="proyectos_siga" class="select form-control">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button id="btn_agregar_proyecto" type="button" disabled
+                    <button id="btn_agregar_sistema" type="button"
                             class="btn btn-danger btn-raised legitRipple"><i
-                            class="icon-plus-circle2 position-left"></i> Agregar Proyecto
+                            class="icon-plus-circle2 position-left"></i> Agregar Sistema
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="tbl_proyecto_siga_selected" class="table table-bordered">
+                    <table id="tbl_sistemas" class="table table-bordered">
                         <thead>
-                        <tr>
-                            <th>ID PROYECTO</th>
-                            <th>DESRIPCION</th>
-                            <th>CODIGO META</th>
-                            <th>CODIGO DEPENDENCIA</th>
-                            <th>AÑO META</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-primary panel-bordered">
-        <div class="panel-heading">
-            <h5 class="panel-title">GESTIÓN DE PROYECTOS</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li>
-                        <a data-action="collapse"></a>
-                    </li>
-                    <li>
-                        <a data-action="close"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="tbl_proyectos_seguridad" class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>SIGLA</th>
-                            <th>AÑO</th>
+                        <tr class="bg-blue-400">
+                            <th>ID</th>
+                            <th>CODIGO</th>
                             <th>DESCRIPCIÓN</th>
-                            <th>CODIGO META</th>
+                            <th>NOMBRE</th>
                             <th>ESTADO</th>
-                            <th>OPCIONES</th>
+                            <th>ACCION</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -91,26 +49,32 @@
         </div>
     </div>
 
-    <div id="modal_editar_proyecto" class="modal fade">
+    <div id="modal_sistemas" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-info">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h5 class="modal-title">Editar Proyecto</h5>
+                    <h5 id="titulo_accion" class="modal-title"></h5>
                 </div>
 
-                <form action="#" class="form-horizontal">
+                <form action="#" id="form_save" class="form-horizontal">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Sigla</label>
+                            <label class="control-label col-sm-3">Código</label>
                             <div class="col-sm-9">
-                                <input type="text" placeholder="Sigla" name="sigla" class="form-control">
+                                <input type="text" placeholder="Sigla" name="codigo" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">Descripción</label>
                             <div class="col-sm-9">
                                 <input type="text" placeholder="Descripcion" name="descripcion" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="Nombre" name="nombre" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -121,7 +85,9 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link legitRipple" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-info legitRipple">Guardar</button>
+                        <button type="button" id="btn_save_sistema" class="btn btn-info legitRipple">
+                            Guardar
+                        </button>
                     </div>
                 </form>
             </div>
@@ -130,10 +96,9 @@
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/select2.min.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/plugins/notifications/sweet_alert.min.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/plugins/notifications/pnotify.min.js" %}"></script>
     <script type="text/javascript" src="{% static "src/helpers.js" %}"></script>
     <script type="text/javascript" src="{% static "src/principal.js" %}"></script>
-    <script type="text/javascript" src="{% static "src/seguridad/proyectos.js" %}"></script>
+    <script type="text/javascript" src="{% static "src/seguridad/sistemas.js" %}"></script>
 {% endblock %}

@@ -31,11 +31,10 @@ $.ajaxSetup({
     }
 });
 
-function setSelect_v2(id, json, keys = []) {
+function setSelect_v2(id, json, keys = [], seleccione = false) {
     $('#' + id).find('option').remove();
-
-    let html = '<option value="-1">Seleccione</option>';
-
+    let html = '';
+    seleccione ? html += '<option value="-1">Seleccione</option>' : '';
     $.each(json, function (key, val) {
         if (typeof val == 'string') {
             html += `<option value="${val}">${val}</option>`
@@ -109,12 +108,11 @@ function setTablev2(arguments, callback, datatable = false, datatable_params = {
     }
 }
 
-function alert_confirm(callback) {
-    "use strict";
+function alert_confirm(callback, title = 'Está seguro de Guardar?', type = 'success') {
     swal({
-        title: 'Esta seguro de Guardar?',
+        title: title,
         text: '',
-        type: 'success',
+        type: type,
         showCancelButton: true,
         confirmButtonColor: "#EF5350",
         confirmButtonText: "Si!",
@@ -127,4 +125,56 @@ function alert_confirm(callback) {
             callback()
         }
     });
+}
+
+function objectToForm(obj) {
+    "use strict";
+    for (let i in obj) {
+        let type_input = $(`input[name=${i}]`).attr('type');
+        switch (type_input) {
+            case 'checkbox':
+                if (obj[i] == 1) {
+                    $(`input[name=${i}]`).prop('checked', true);
+                } else {
+                    $(`input[name=${i}]`).prop('checked', false);
+                }
+                break;
+            case 'text':
+                $(`input[name=${i}]`).val(obj[i]);
+                break;
+        }
+    }
+}
+
+function formToObject(frm) {
+    "use strict";
+    let form = $('#' + frm).serializeArray();
+    let data = {};
+    for (let i in form) {
+        data[form[i].name] = form[i].value;
+    }
+    $(`#${frm} input:checkbox`).each((key, val)=> {
+        data[val.name] = val.checked == true ? 1 : 0;
+    });
+    return data;
+}
+
+function diffSistemas(array, ids) {
+    "use strict";
+    let asignado = [];
+    var no_asignado = Object.assign([], array);
+    if (ids.length) {
+        for (let i in no_asignado) {
+            for (let v in ids) {
+                if (no_asignado[i].id == ids[v]) {
+                    asignado.push(no_asignado[i]);
+                    no_asignado.splice(i, 1);
+                }
+            }
+        }
+    } else {
+        return {asignado: asignado, no_asignado: no_asignado};
+    }
+
+    return {asignado: asignado, no_asignado: no_asignado};
 }

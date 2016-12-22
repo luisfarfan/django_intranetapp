@@ -5,7 +5,7 @@ from django.db import models
 class Proyecto(models.Model):
     id_siga = models.IntegerField()
     nombre = models.CharField(max_length=100)
-    sigla = models.CharField(max_length=50)
+    sigla = models.CharField(max_length=50, null=True, blank=True)
     anio = models.IntegerField()
     descripcion = models.TextField(blank=True, null=True)
     fecha_inicio = models.DateField(blank=True, null=True)
@@ -32,6 +32,7 @@ class Sistema(models.Model):
     fec_creacion = models.DateTimeField(blank=True, null=True)
     usr_edicion = models.CharField(max_length=100, blank=True, null=True)
     fec_edicion = models.DateTimeField(blank=True, null=True)
+    estado = models.IntegerField(default=1)
 
     class Meta:
         managed = True

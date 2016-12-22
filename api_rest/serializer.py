@@ -9,15 +9,15 @@ class UsuarioSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 
-class ProyectoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Proyecto
-        fields = ('__all__')
-
-
 class SistemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sistema
+        fields = ('__all__')
+
+
+class ProyectoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proyecto
         fields = ('__all__')
 
 

@@ -4,6 +4,7 @@ from .serializer import *
 from rest_framework.views import APIView
 from rest_framework import generics, viewsets
 from .models import ProyectosSiga
+import json
 
 
 # Create your views here.
@@ -68,3 +69,15 @@ def getProyectosSiga(request):
     proyectos_disponibles = ProyectosSiga.objects.using('consecucion').exclude(id__in=proyectos).values()
 
     return JsonResponse(list(proyectos_disponibles), safe=False)
+
+
+def saveProyectoSistema(request):
+    id_proyecto = request.POST['id_proyecto']
+    id_sistemas = request.POST.getlist('id_sistemas[]')
+    bulk = []
+    for i in id_sistemas:
+        bulk.append(ProyectoSistema(sistemas=Sistema.objects.get(pk=i), proyectos=Proyecto.objects.get(pk=id_proyecto)))
+
+    ProyectoSistema.objects.bulk_create(bulk)
+
+    return JsonResponse({'msg': True}, safe=False)
