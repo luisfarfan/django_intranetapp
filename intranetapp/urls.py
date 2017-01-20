@@ -19,6 +19,7 @@ from proyectos.urls import router_proyecto
 from sistemas.urls import router_sistema
 from usuario.urls import router_usuario
 from django.views.generic import TemplateView
+from usuario_modulo.models import Modulo
 
 urlpatterns = []
 
@@ -30,7 +31,12 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^usuario/', include('usuario.urls', namespace='usuario')),
     url(r'^rest_proyectos/', include('proyectos.urls', namespace='proyectos')),
-
     url(r'^login/', TemplateView.as_view(template_name='login.html'))
 ]
 
+modulos_routes = Modulo.objects.all()
+
+for menu in modulos_routes:
+    if menu.is_padre == 0:
+        urlpatterns.append(
+            url(r'^' + menu.slug + '/', TemplateView.as_view(template_name=menu.template_html)))
