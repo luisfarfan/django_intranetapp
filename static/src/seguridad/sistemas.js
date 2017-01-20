@@ -23,7 +23,7 @@ function getSistemas() {
     let html = '';
     $('#tbl_sistemas').find('tbody').empty();
     $.ajax({
-        url: `${BASE_URL}/rest/sistemas/`,
+        url: `${BASE_URL}/rest_sistemas/sistema/`,
         type: 'GET',
         success: response => {
             sistemas = response;
@@ -58,7 +58,7 @@ function modal_editarSistema(id) {
 function eliminarSistema() {
     "use strict";
     let options = {
-        url: `${BASEURL}/rest/sistemas/${sistema_selected[0].id}`,
+        url: `${BASEURL}/rest_sistemas/sistema/${sistema_selected[0].id}`,
         type: 'DELETE',
         success: () => {
             getSistemas();
@@ -77,11 +77,11 @@ function saveSistema() {
     "use strict";
     let options = {};
     if (sistema_selected.length) {
-        options.url = `${BASEURL}/rest/sistemas/${sistema_selected[0].id}/`;
+        options.url = `${BASEURL}/rest_sistemas/sistema/${sistema_selected[0].id}/`;
         options.type = 'PUT';
         options.data = formToObject('form_save');
     } else {
-        options.url = `${BASEURL}/rest/sistemas/`;
+        options.url = `${BASEURL}/rest_sistemas/sistema/`;
         options.type = 'POST';
         options.data = formToObject('form_save');
     }

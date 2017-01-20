@@ -10,7 +10,7 @@ BASEURL = protocol + '//' + host;
 
 $('#iniciar_sesion').on('click', event => {
     "use strict";
-    let url = `${BASEURL}/authenticate/`;
+    let url = `${BASEURL}/usuario/authentication/`;
     let data = {usuario: $('#usuario').val(), clave: $('#clave').val()};
     $.ajax({
         url: url,

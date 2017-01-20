@@ -17,12 +17,12 @@ var proyectos_siga_selected = {};
 var proyectos_seguridad = [];
 var proyectos_seguridad_selected = [];
 
-$.getJSON(`${BASEURL}/rest/sistemas/`, response => sistemas = response);
+$.getJSON(`${BASEURL}/rest_sistemas/sistema/`, response => sistemas = response);
 
 function getProyectosSiga() {
     "use strict";
     $.ajax({
-        url: `${BASE_URL}/rest/getProyectosSiga/`,
+        url: `${BASE_URL}/rest_proyectos/getProyectosSiga/`,
         type: 'GET',
         success: response => {
             proyectos_siga = response;
@@ -48,7 +48,7 @@ function getProyectosSeguridad() {
     let _html = '';
     $('#tbl_proyectos_seguridad').find('tbody').empty();
     $.ajax({
-        url: `${BASE_URL}/rest/proyectos/`,
+        url: `${BASE_URL}/rest_proyectos/proyecto/`,
         type: 'GET',
         success: response => {
             proyectos_seguridad = response;
@@ -132,7 +132,7 @@ function setModal_asignarSistemas() {
 
 function addProyecto() {
     "use strict";
-    let url = `${BASEURL}/rest/proyectos/`;
+    let url = `${BASEURL}/rest_proyectos/proyecto/`;
     let data = {
         id_siga: proyectos_siga_selected[0].id,
         nombre: proyectos_siga_selected[0].desc_proyecto,
@@ -158,7 +158,7 @@ function saveProyecto() {
     data.sigla = $('input[name="sigla"]').val();
     data.descripcion = $('input[name="descripcion"]').val();
     data.estado = $('input[name="estado"]').is(':checked') ? 1 : 0;
-    let url = `${BASEURL}/rest/proyectos/${data.id}/`;
+    let url = `${BASEURL}/rest_proyectos/proyecto/${data.id}/`;
     $.ajax({
         url: url,
         type: 'PUT',
@@ -184,7 +184,7 @@ $('#btn_save_proyecto_seguridad').on('click', event => {
 
 function saveProyectoSistema() {
     "use strict";
-    let url = `${BASEURL}/rest/saveProyectoSistema/`;
+    let url = `${BASEURL}/rest_proyectos/saveProyectoSistema/`;
     let id_sistemas = $('#select_sistemas_no_asignados').val();
     let id_proyecto = proyectos_seguridad_selected[0].id;
     let data = {

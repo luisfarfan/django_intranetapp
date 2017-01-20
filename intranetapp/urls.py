@@ -15,13 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from api_rest.urls import router
+from proyectos.urls import router_proyecto
+from sistemas.urls import router_sistema
+from usuario.urls import router_usuario
+from django.views.generic import TemplateView
+
+urlpatterns = []
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^rest/', include(router.urls)),
+    url(r'^rest_proyectos/', include(router_proyecto.urls)),
+    url(r'^rest_sistemas/', include(router_sistema.urls)),
+    url(r'^rest_usuario/', include(router_usuario.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^', include('authentication.urls', namespace='authentication')),
-    url(r'^seguridad/', include('seguridad.urls', namespace='seguridad')),
-    url(r'^rest/', include('api_rest.urls', namespace='api_rest')),
+    url(r'^usuario/', include('usuario.urls', namespace='usuario')),
+    url(r'^rest_proyectos/', include('proyectos.urls', namespace='proyectos')),
+
+    url(r'^login/', TemplateView.as_view(template_name='login.html'))
 ]
+
