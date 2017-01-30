@@ -8,6 +8,12 @@ class RecursiveSerializer(serializers.Serializer):
         return serializer.data
 
 
+class _ModuloSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Modulo
+        fields = ('__all__')
+
+
 class ModuloSerializer(serializers.ModelSerializer):
     modulos_hijos = RecursiveSerializer(many=True, read_only=True)
 
@@ -22,17 +28,21 @@ class PermisoSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 
-class RolSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Rol
-        fields = ('__all__')
-
-
 class ModuloRolSerializer(serializers.ModelSerializer):
     permisos = PermisoSerializer(many=True, read_only=True)
+    modulo = _ModuloSerializer()
 
     class Meta:
         model = ModuloRol
+        fields = ('__all__')
+
+
+class RolSerializer(serializers.ModelSerializer):
+    # modulo_rol = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
+    modulo_rol = ModuloRolSerializer(many=True)
+
+    class Meta:
+        model = Rol
         fields = ('__all__')
 
 

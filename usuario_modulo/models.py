@@ -17,6 +17,7 @@ class Modulo(models.Model):
     modulo_padre = models.ForeignKey('self', related_name='modulos_hijos', null=True, blank=True)
     template_html = models.CharField(max_length=255, null=True)
     is_padre = models.IntegerField(default=0)
+    icon = models.CharField(max_length=100, default='icon-home4')
     roles = models.ManyToManyField('Rol', through='ModuloRol')
 
     def __unicode__(self):
@@ -56,7 +57,7 @@ class PermisoAdmin(admin.ModelAdmin):
 
 
 class ModuloRol(models.Model):
-    rol = models.ForeignKey('Rol')
+    rol = models.ForeignKey('Rol', related_name='modulo_rol')
     modulo = models.ForeignKey('Modulo')
     permisos = models.ManyToManyField('Permiso', through='ModuloRolPermisos')
     usr_creacion = models.CharField(max_length=100, blank=True, null=True)

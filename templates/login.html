@@ -89,6 +89,7 @@
                             <button type="button" id="iniciar_sesion" class="btn bg-blue-400 btn-block">Ingresar <i
                                     class="icon-circle-right2 position-right"></i></button>
                         </div>
+                        <div id="div_error_message"></div>
                     </div>
                 </form>
                 <!-- /advanced login -->
@@ -106,6 +107,15 @@
 <!-- /page container -->
 
 </body>
+<script type="text/javascript">
+    var pathArray = location.href.split('/');
+    var protocol = pathArray[0];
+    var host = pathArray[2];
+    BASEURL = protocol + '//' + host;
+</script>
+<script type="text/javascript" src="{% static "assets/js/require.js" %}"></script>
 <script type="text/javascript" src="{% static "src/helpers.js" %}"></script>
-<script type="text/javascript" src="{% static "src/principal.js" %}"></script>
+<script>
+    require(['{% static "dist/login.js" %}']);
+</script>
 </html>

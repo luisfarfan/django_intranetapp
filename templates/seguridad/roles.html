@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div class="col-md-6">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h5 class="panel-title">Roles del Sistema<a class="heading-elements-toggle"><i
+                        class="icon-more"></i></a>
+                </h5>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+            </div>
+
+            <div class="table-responsive">
+                <table id="table_roles" class="table table-bordered">
+                    <thead>
+                    <tr class="bg-blue">
+                        <th>N°</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h5 class="panel-title">Detalle<a class="heading-elements-toggle"><i
+                        class="icon-more"></i></a>
+                </h5>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/select2.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "assets/js/plugins/notifications/sweet_alert.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "assets/js/plugins/notifications/pnotify.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/uniform.min.js" %}"></script>
+    <script type="text/javascript"
+            src="{% static "assets/js/plugins/forms/selects/bootstrap_multiselect.js" %}"></script>
+    <script type="text/javascript" src="{% static "assets/js/require.js" %}"></script>
+    <script>
+        require(['{% static "dist/seguridad/usuarios.roles/roles.view.js" %}']);
+    </script>
+{% endblock %}

@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from .serializer import *
+from .models import Rol
+from rest_framework.views import APIView
+from rest_framework import generics, viewsets
 
-# Create your views here.
+
+class RolViewSet(viewsets.ModelViewSet):
+    serializer_class = RolSerializer
+    queryset = Rol.objects.all()
+
+
+class PermisoViewSet(viewsets.ModelViewSet):
+    serializer_class = PermisoSerializer
+    queryset = Permiso.objects.all()

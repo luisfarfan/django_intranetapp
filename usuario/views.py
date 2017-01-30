@@ -32,18 +32,21 @@ class UserApi(object):
                 routes = Modulo.objects.exclude(proyectosistema__isnull=True).filter(
                     modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).values('slug',
                                                                                                            'template_html')
-                menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).filter(
-                    modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).distinct(),
+                #menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).filter(
+                 #   modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).distinct(),
+                  #                      many=True).data
+                menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).distinct(),
                                         many=True).data
-                token = '5'
-                session = SessionStore(session_key=token)
-                session['user_data'] = user_data
-                session['routes'] = list(routes)
-                session['menu'] = menu
-                session.create()
 
-                return JsonResponse({'user_data': user_data, 'routes': list(routes), 'menu': menu},
-                                    safe=False)
+                request.session['user_data'] = user_data
+                request.session['routes'] = list(routes)
+                request.session['menu'] = menu
+                session = Session.objects.get(pk=request.session.session_key)
+                session_return = session.get_decoded()
+                session_return['session_key'] = request.session.session_key
+                return JsonResponse(session_return, safe=False)
+
+            return JsonResponse({}, safe=False)
 
     def getSession(request):
         sesion = Session.objects.get(pk=5)
