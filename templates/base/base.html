@@ -41,6 +41,9 @@
             <!-- /page header -->
             <!-- Content area -->
             <div class="content">
+                <div style="display:none">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                </div>
                 {% block content %}
                 {% endblock %}
             </div>

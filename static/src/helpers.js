@@ -16,7 +16,8 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-var csrftoken = getCookie('csrftoken');
+//var csrftoken = getCookie('csrftoken');
+var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
 
 
 function csrfSafeMethod(method) {
@@ -26,6 +27,7 @@ function csrfSafeMethod(method) {
 $.ajaxSetup({
     beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            console.log(csrftoken);
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
     }
@@ -50,7 +52,7 @@ function findInObject(obj, key, value) {
     let res = [];
     if (value != '-1') {
         if (obj.length > 0) {
-            $.each(obj, (k, v)=> {
+            $.each(obj, (k, v) => {
                 if (v[key] == value) {
                     res.push(v);
                 }
@@ -63,7 +65,7 @@ function findInObject(obj, key, value) {
 function setTable(id, json, params, datatable = false, datatable_params = {}) {
     let html = '';
     if (json.length > 0) {
-        $.each(json, (key, val)=> {
+        $.each(json, (key, val) => {
             html += '<tr>';
             for (let i in params) {
                 html += `<td>${val[params[i]] == null ? 0 : val[params[i]]}</td>`;
@@ -91,7 +93,7 @@ function setTablev2(arguments, callback, datatable = false, datatable_params = {
         ('#' + id).DataTable({datatable_params})
         ('#' + id).dataTable().fnDestroy();
     }
-    $.each(arguments.json, (key, val)=> {
+    $.each(arguments.json, (key, val) => {
         html += '<tr>';
         for (let i in arguments.params) {
             html += `<td>${val[arguments.params[i]] == null ? 0 : val[arguments.params[i]]}</td>`;
@@ -153,7 +155,7 @@ function formToObject(frm) {
     for (let i in form) {
         data[form[i].name] = form[i].value;
     }
-    $(`#${frm} input:checkbox`).each((key, val)=> {
+    $(`#${frm} input:checkbox`).each((key, val) => {
         data[val.name] = val.checked == true ? 1 : 0;
     });
     return data;

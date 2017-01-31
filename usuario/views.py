@@ -5,17 +5,12 @@ from rest_framework import generics, viewsets
 from .models import Usuario
 from usuario_modulo.models import Modulo, ModuloRolPermisos
 from usuario_modulo.serializer import ModuloSerializer
-from rest_framework.decorators import detail_route, list_route
-from rest_framework.response import Response
-import datetime
-from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
-import uuid
 
 
 class UserApi(object):
     def authenticate(request):
-        if request.is_ajax():
+        if request.is_ajax() and request.method == 'POST':
             usuario = request.POST['usuario']
             clave = request.POST['clave']
             user = Usuario.objects.filter(usuario=usuario, clave=clave)
@@ -32,15 +27,16 @@ class UserApi(object):
                 routes = Modulo.objects.exclude(proyectosistema__isnull=True).filter(
                     modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).values('slug',
                                                                                                            'template_html')
-                #menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).filter(
-                 #   modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).distinct(),
-                  #                      many=True).data
+                # menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).filter(
+                #   modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).distinct(),
+                #                      many=True).data
                 menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).distinct(),
                                         many=True).data
 
                 request.session['user_data'] = user_data
                 request.session['routes'] = list(routes)
                 request.session['menu'] = menu
+                print(request.session)
                 session = Session.objects.get(pk=request.session.session_key)
                 session_return = session.get_decoded()
                 session_return['session_key'] = request.session.session_key

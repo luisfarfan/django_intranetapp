@@ -8,6 +8,5 @@ router_usuario = routers.DefaultRouter()
 
 urlpatterns = [
     url(r'authentication', UserApi.authenticate),
-    url(r'getSesion', UserApi.getSession),
     url(r'usuario_modulos/(?P<usuario_id>.+)/$', ModulosUsuarioViewSet.as_view()),
 ]
