@@ -22,6 +22,9 @@ from usuario_modulo.urls import router_modulo_usuario
 from django.views.generic import TemplateView
 from usuario_modulo.models import Modulo
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views import View
+from django.http import HttpResponse
+from django.template import RequestContext, Template, loader
 
 urlpatterns = []
 
@@ -37,9 +40,23 @@ urlpatterns = [
     url(r'^login/', ensure_csrf_cookie(TemplateView.as_view(template_name='login.html')))
 ]
 
+
+class DinamicView(View):
+    template_name = ''
+    modulo_id = ''
+
+    def get(self, request):
+        template = loader.get_template(self.template_name)
+        context = {
+            'modulo_id': self.modulo_id,
+        }
+        return HttpResponse(template.render(context, request))
+
+
 modulos_routes = Modulo.objects.all()
 
 for menu in modulos_routes:
     if menu.is_padre == 0:
         urlpatterns.append(
-            url(r'^' + menu.slug + '/', ensure_csrf_cookie(TemplateView.as_view(template_name=menu.template_html))))
+            url(r'^' + menu.slug + '/',
+                ensure_csrf_cookie(DinamicView.as_view(template_name=menu.template_html, modulo_id=menu.id))))

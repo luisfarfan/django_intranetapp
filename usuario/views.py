@@ -36,7 +36,6 @@ class UserApi(object):
                 request.session['user_data'] = user_data
                 request.session['routes'] = list(routes)
                 request.session['menu'] = menu
-                print(request.session)
                 session = Session.objects.get(pk=request.session.session_key)
                 session_return = session.get_decoded()
                 session_return['session_key'] = request.session.session_key

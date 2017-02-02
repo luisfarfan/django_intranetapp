@@ -24,6 +24,7 @@ $('#iniciar_sesion').on('click', event => {
                 setTimeout(()=> {
                     sessionHelper.setSession('usuario', response);
                     let session = sessionHelper.getSession()
+                    console.log(response);
                     window.location.href = `${BASEURL}/${session.routes[2].slug}`;
                 }, 1000)
             }

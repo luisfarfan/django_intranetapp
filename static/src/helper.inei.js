@@ -34,12 +34,12 @@ export class MenuHelper {
     recursiveHTMLSideBar(array) {
         let html = '';
         array.map((value, key)=> {
-
-            if (value.modulos_hijos.length > 0) {
+            if (value.modulos_hijos.length) {
                 html += `<li><a href="#"><i class="icon-tree5"></i> <span>${value.descripcion}</span></a><ul>`;
                 value.modulos_hijos.map((child1, k)=> {
                     html += `<li><a href="${child1.slug}"><i class="icon-IE"></i>${child1.descripcion}</a></li>`;
                 })
+                html += this.recursiveHTMLSideBar(value.modulos_hijos);
                 html += `</ul>`;
             } else {
                 html += `<li><a href="${BASEURL}/${value.slug}"><i class="icon-home4"></i> <span>${value.descripcion}</span></a></li>`;

@@ -64,11 +64,14 @@
 <script type="text/javascript" src="{% static "assets/js/plugins/loaders/pace.min.js" %}"></script>
 <script type="text/javascript" src="{% static "assets/js/layout_fixed_custom.js" %}"></script>
 <script type="text/javascript">
+    /** GLOBAL VARIABLES */
     var pathArray = location.href.split('/');
     var protocol = pathArray[0];
     var host = pathArray[2];
     BASEURL = protocol + '//' + host;
     BASE_URL = protocol + '//' + host;
+
+    var MODULO_ID = '{{ modulo_id }}'
 </script>
 
 <!-- /core JS files -->
