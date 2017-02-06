@@ -7,12 +7,12 @@ export class ObjectHelper {
         return Object.keys(obj).length === 0;
     }
 
-    findInArrayObject(obj, value_search, key) {
+    findInArrayObject(obj, value_search, key_search) {
         let res = false;
         if (!this.isEmpty(obj)) {
             obj.map((value, key)=> {
-                if (key in value) {
-                    if (value[key] == value_search) {
+                if (key_search in value) {
+                    if (value[key_search] == value_search) {
                         res = value;
                     }
                 }
