@@ -19,7 +19,8 @@ class ModuloSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Modulo
-        fields = ('id', 'nombre', 'descripcion', 'slug', 'codigo', 'modulo_padre', 'modulos_hijos', 'template_html')
+        fields = (
+            'id', 'nombre', 'descripcion', 'slug', 'icon', 'codigo', 'modulo_padre', 'modulos_hijos', 'template_html')
 
 
 class PermisoSerializer(serializers.ModelSerializer):
@@ -34,6 +35,12 @@ class ModuloRolSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ModuloRol
+        fields = ('__all__')
+
+
+class ModelRolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rol
         fields = ('__all__')
 
 

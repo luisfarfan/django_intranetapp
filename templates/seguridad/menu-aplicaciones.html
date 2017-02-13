@@ -6,22 +6,50 @@
     <div class="col-md-6">
         <div class="panel panel-primary panel-bordered">
             <div class="panel-heading">
-                <h6 class="panel-title">Roles<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                <h6 class="panel-title">Proyectos<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
                 <div class="heading-elements">
-                    <button type="button" data-toggle="modal" data-target="#modal_rol"
-                            class="btn btn-danger btn-icon heading-btn legitRipple"><i
-                            class="icon-plus3"></i></button>
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                    </ul>
                 </div>
             </div>
 
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table id="table_roles" class="table table-bordered">
+                    <table id="table_proyectos" class="table table-bordered">
+                        <thead>
+                        <tr class="bg-blue">
+                            <th>Sigla</th>
+                            <th>Año</th>
+                            <th>Nombre</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <h6 class="panel-title">Sistemas por Proyecto<a class="heading-elements-toggle"><i
+                        class="icon-more"></i></a></h6>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="table_sistemas" class="table table-bordered">
                         <thead>
                         <tr class="bg-blue">
                             <th>N°</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
+                            <th>Nombre</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,13 +69,12 @@
                     <ul class="icons-list">
                         <li><a data-action="collapse"></a></li>
                         <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="panel-body">
-                <div id="tree_menu_rol" class="tree-persistence well border-left-danger border-left-lg"></div>
+                <div id="tree_modulos" class="tree-persistence well border-left-danger border-left-lg"></div>
             </div>
 
         </div>
@@ -93,7 +120,6 @@
 
 {% block js %}
     <script type="text/javascript" src="{% static "assets/js/plugins/forms/selects/select2.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "assets/js/plugins/notifications/pnotify.min.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/plugins/forms/styling/uniform.min.js" %}"></script>
     <script type="text/javascript"
             src="{% static "assets/js/plugins/forms/selects/bootstrap_multiselect.js" %}"></script>
@@ -106,7 +132,4 @@
     <script type="text/javascript" src="{% static "assets/js/plugins/trees/fancytree_childcounter.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/plugins/forms/validation/validate.min.js" %}"></script>
     <script type="text/javascript" src="{% static "assets/js/require.js" %}"></script>
-    <script>
-        require(['{% static "dist/seguridad/usuarios.roles/roles.view.js" %}']);
-    </script>
 {% endblock %}

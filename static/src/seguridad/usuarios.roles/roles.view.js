@@ -77,8 +77,6 @@ export function getRolSelected(id) {
 
 }
 
-getAllRoles();
-
 
 function drawRoles() {
     let html = '';
@@ -94,9 +92,48 @@ function drawRoles() {
     });
     $('#table_roles').find('tbody').html(html);
     $('li[name="li_rol"]').on('click', event => {
-        console.log($(event.currentTarget).data('value'));
         getRolSelected($(event.currentTarget).data('value'));
     });
 }
 
+var RolesCrud = {
+    add: ()=> {
+        if (form_rol_validate.valid()) {
+            let valid_form = objectHelper.formToObject(util.serializeForm('form_rol'));
+            rolesModel.add(valid_form).done((response)=> {
+                util.showSwalAlert('Se ha agregado el Rol correctamente', 'Exito!', 'success');
+                getAllRoles();
+                $('#modal_rol').modal('hide');
+                form_rol_validate.resetForm();
+            }).error(error=> {
+                util.showSwalAlert('Ha ocurrido un error, por favor intente nuevamente', 'Error!', 'error');
+            })
+        }
+    }
+}
 
+
+var RolJsonRules = {
+    form_rol: {
+        nombre: {
+            maxlength: 10
+        },
+        descripcion: {
+            maxlength: 10
+        },
+    }
+}
+
+var form_rol_validate = $('#form_rol').validate(util.validateForm(RolJsonRules.form_rol));
+
+var Roles = {
+    initRoles: ()=> {
+        getAllRoles();
+    },
+};
+
+Roles.initRoles();
+
+$('#btn_submit_form').on('click', event => {
+    RolesCrud.add();
+})

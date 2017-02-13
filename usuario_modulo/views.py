@@ -6,6 +6,11 @@ from rest_framework import generics, viewsets
 
 
 class RolViewSet(viewsets.ModelViewSet):
+    serializer_class = ModelRolSerializer
+    queryset = Rol.objects.all()
+
+
+class ModuloRolViewSet(viewsets.ModelViewSet):
     serializer_class = RolSerializer
     queryset = Rol.objects.all()
 

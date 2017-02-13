@@ -16,6 +16,11 @@ class ProyectoSistemaViewSet(viewsets.ModelViewSet):
     queryset = ProyectoSistema.objects.all()
 
 
+class SistemasbyProyectoViewSet(viewsets.ModelViewSet):
+    serializer_class = SistemasxProyectoSerializer
+    queryset = Proyecto.objects.all()
+
+
 class ProyectosApi:
     def getProyectosSiga(request):
         proyectos = list(Proyecto.objects.values_list('id_siga', flat=True))

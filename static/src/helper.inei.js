@@ -20,10 +20,17 @@ export class ObjectHelper {
         }
         return res;
     }
+
+    formToObject(form = []) {
+        let formObject = {}
+        form.map((value, key)=> {
+            formObject[value.name] = value.value;
+        });
+        return formObject;
+    }
 }
 
 export class MenuHelper {
-
     drawSidebar(menu) {
         let html = '';
         html += `<li class="navigation-header"><span>Censo de Poblacion y Vivienda VIII</span> <i class="icon-menu" title="Main pages"></i></li>`;
@@ -35,14 +42,14 @@ export class MenuHelper {
         let html = '';
         array.map((value, key)=> {
             if (value.modulos_hijos.length) {
-                html += `<li><a href="#"><i class="icon-tree5"></i> <span>${value.descripcion}</span></a><ul>`;
+                html += `<li><a href="#"><i class="${value.icon}"></i> <span>${value.descripcion}</span></a><ul>`;
                 value.modulos_hijos.map((child1, k)=> {
-                    html += `<li><a href="${child1.slug}"><i class="icon-IE"></i>${child1.descripcion}</a></li>`;
+                    html += `<li ${child1.id == MODULO_ID ? 'class="active"' : ''}><a href="${BASEURL}/${child1.slug}"><i class="${child1.icon}"></i>${child1.descripcion}</a></li>`;
+                    html += this.recursiveHTMLSideBar(child1.modulos_hijos);
                 })
-                html += this.recursiveHTMLSideBar(value.modulos_hijos);
                 html += `</ul>`;
             } else {
-                html += `<li><a href="${BASEURL}/${value.slug}"><i class="icon-home4"></i> <span>${value.descripcion}</span></a></li>`;
+                html += `<li ${value.id == MODULO_ID ? 'class="active"' : ''}><a href="${BASEURL}/${value.slug}"><i class="${value.icon}"></i> <span>${value.descripcion}</span></a></li>`;
             }
         });
         return html;
@@ -50,7 +57,8 @@ export class MenuHelper {
 }
 export class SessionHelper {
     setSession(key, object) {
-        localStorage.setItem(key, JSON.stringify(object))
+        key in localStorage ? localStorage.removeItem(key) : '';
+        localStorage.setItem(key, JSON.stringify(object));
         return this.getSession();
     }
 

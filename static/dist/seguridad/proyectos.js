@@ -24,8 +24,7 @@ define([], function () {
 
     function getProyectosSiga() {
         "use strict";
-
-        $.ajax({
+        /**$.ajax({
             url: `${BASE_URL}/rest_proyectos/getProyectosSiga/`,
             type: 'GET',
             success: response => {
@@ -33,7 +32,7 @@ define([], function () {
                 setSelect_v2('proyectos_siga', proyectos_siga, ['id', 'desc_proyecto'], true);
                 $('#proyectos_siga').trigger('change');
             }
-        });
+        });*/
     }
 
     $('#proyectos_siga').on('change', event => {
@@ -222,7 +221,6 @@ define([], function () {
     $('#select_sistemas_no_asignados').change(event => {
         "use strict";
 
-        debugger;
         if (event.target.value == null) {
             $('#btn_asignar_sistemas').prop('disabled', true);
         } else {

@@ -5,9 +5,9 @@ define(['exports'], function (exports) {
         value: true
     });
     /**
-     * Created by lfarfan on 29/01/2017.
+     * Created by lfarfan on 12/02/2017.
      */
-    class RolesModel {
+    class MenuAplicacionesModel {
         constructor() {
             this.url = `${BASEURL}/rest_modulousuario/rol/`;
             this.url_rol_modulo = `${BASEURL}/rest_modulousuario/modulos_rol/`;
@@ -43,5 +43,5 @@ define(['exports'], function (exports) {
             });
         }
     }
-    exports.default = RolesModel;
+    exports.default = MenuAplicacionesModel;
 });

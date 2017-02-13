@@ -1,4 +1,4 @@
-define(['exports', '../assets/js/plugins/notifications/pnotify.custom.min.js'], function (exports) {
+define(['exports'], function (exports) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -7,19 +7,23 @@ define(['exports', '../assets/js/plugins/notifications/pnotify.custom.min.js'], 
     exports.showDivAlert = showDivAlert;
     exports.showSwalAlert = showSwalAlert;
     exports.jsonFormatFancyTree = jsonFormatFancyTree;
+    exports.validateForm = validateForm;
+    exports.serializeForm = serializeForm;
+    /**
+     * Created by lfarfan on 29/01/2017.
+     */
     function showDivAlert(message, type) {
         return `<div class="alert bg-${type} alert-styled-left">
                 <button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
                 <span class="text-semibold">${message}</span>
             </div>`;
-    } /**
-       * Created by lfarfan on 29/01/2017.
-       */
-    function showSwalAlert(message, type) {
+    }
+
+    function showSwalAlert(message, title, type) {
         new PNotify({
-            title: 'Primary notice',
-            text: 'Check me out! I\'m a notice.',
-            icon: 'icon-menu6'
+            title: title,
+            text: message,
+            type: type
         });
     }
 
@@ -63,5 +67,74 @@ define(['exports', '../assets/js/plugins/notifications/pnotify.custom.min.js'], 
             }
         });
         return treejson;
+    }
+
+    function validateForm(id_form, rules) {
+        let setOptions = {
+            ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+            errorClass: 'validation-error-label',
+            successClass: 'validation-valid-label',
+            highlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+            unhighlight: function (element, errorClass) {
+                $(element).removeClass(errorClass);
+            },
+
+            // Different components require proper error label placement
+            errorPlacement: function (error, element) {
+
+                // Styled checkboxes, radios, bootstrap switch
+                if (element.parents('div').hasClass("checker") || element.parents('div').hasClass("choice") || element.parent().hasClass('bootstrap-switch-container')) {
+                    if (element.parents('label').hasClass('checkbox-inline') || element.parents('label').hasClass('radio-inline')) {
+                        error.appendTo(element.parent().parent().parent().parent());
+                    } else {
+                        error.appendTo(element.parent().parent().parent().parent().parent());
+                    }
+                }
+
+                // Unstyled checkboxes, radios
+                else if (element.parents('div').hasClass('checkbox') || element.parents('div').hasClass('radio')) {
+                        error.appendTo(element.parent().parent().parent());
+                    }
+
+                    // Input with icons and Select2
+                    else if (element.parents('div').hasClass('has-feedback') || element.hasClass('select2-hidden-accessible')) {
+                            error.appendTo(element.parent());
+                        }
+
+                        // Inline checkboxes, radios
+                        else if (element.parents('label').hasClass('checkbox-inline') || element.parents('label').hasClass('radio-inline')) {
+                                error.appendTo(element.parent().parent());
+                            }
+
+                            // Input group, styled file input
+                            else if (element.parent().hasClass('uploader') || element.parents().hasClass('input-group')) {
+                                    error.appendTo(element.parent().parent());
+                                } else {
+                                    error.insertAfter(element);
+                                }
+            },
+            validClass: "validation-valid-label",
+            success: function (label) {
+                label.addClass("validation-valid-label").text("Success.");
+            },
+            rules: {}
+        };
+
+        setOptions.rules = rules;
+        return setOptions;
+    }
+
+    function serializeForm(id_form) {
+        let objectForm = $(`#${id_form}`).serializeArray();
+        let checkboxes = $('input:checkbox');
+        if (checkboxes.length) {
+            checkboxes.map((value, key) => {
+                objectForm.append({ value: $(key).is(':checked') ? 1 : 0, name: key.name });
+            });
+        }
+
+        return objectForm;
     }
 });

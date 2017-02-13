@@ -1,7 +1,7 @@
 /**
- * Created by lfarfan on 29/01/2017.
+ * Created by lfarfan on 12/02/2017.
  */
-export default class RolesModel {
+export default class MenuAplicacionesModel {
     constructor() {
         this.url = `${BASEURL}/rest_modulousuario/rol/`;
         this.url_rol_modulo = `${BASEURL}/rest_modulousuario/modulos_rol/`;

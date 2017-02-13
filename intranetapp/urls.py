@@ -25,6 +25,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views import View
 from django.http import HttpResponse
 from django.template import RequestContext, Template, loader
+from .utils import getBreadcumbs
 
 urlpatterns = []
 
@@ -44,11 +45,13 @@ urlpatterns = [
 class DinamicView(View):
     template_name = ''
     modulo_id = ''
+    breadcumbs = ''
 
     def get(self, request):
         template = loader.get_template(self.template_name)
         context = {
             'modulo_id': self.modulo_id,
+            'breadcumbs': self.breadcumbs
         }
         return HttpResponse(template.render(context, request))
 
@@ -59,4 +62,5 @@ for menu in modulos_routes:
     if menu.is_padre == 0:
         urlpatterns.append(
             url(r'^' + menu.slug + '/',
-                ensure_csrf_cookie(DinamicView.as_view(template_name=menu.template_html, modulo_id=menu.id))))
+                ensure_csrf_cookie(DinamicView.as_view(template_name=menu.template_html, modulo_id=menu.id,
+                                                       breadcumbs=getBreadcumbs(menu.id)))))

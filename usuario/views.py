@@ -24,9 +24,10 @@ class UserApi(object):
                     if i['fecha_contrato_extended'] is not None:
                         i['fecha_contrato_extended'] = i['fecha_contrato_extended'].strftime("%d/%m/%Y")
 
-                routes = Modulo.objects.exclude(proyectosistema__isnull=True).filter(
-                    modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).values('slug',
-                                                                                                           'template_html')
+                        # routes = Modulo.objects.exclude(proyectosistema__isnull=True).filter(
+                        #   modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).values('slug',
+                        #                                                                                         'template_html')
+                routes = Modulo.objects.filter(proyectosistema__isnull=True).values('slug', 'template_html')
                 # menu = ModuloSerializer(instance=Modulo.objects.exclude(proyectosistema__isnull=True).filter(
                 #   modulorol__modulorolpermisos__modulorolpermisosusuario__usuario__pk=user[0].id).distinct(),
                 #                      many=True).data
@@ -36,9 +37,12 @@ class UserApi(object):
                 request.session['user_data'] = user_data
                 request.session['routes'] = list(routes)
                 request.session['menu'] = menu
-                session = Session.objects.get(pk=request.session.session_key)
+                if not request.session.session_key:
+                    request.session.save()
+                session_id = request.session.session_key
+                session = Session.objects.get(pk=session_id)
                 session_return = session.get_decoded()
-                session_return['session_key'] = request.session.session_key
+                session_return['session_key'] = session_id
                 return JsonResponse(session_return, safe=False)
 
             return JsonResponse({}, safe=False)
