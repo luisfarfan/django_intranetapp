@@ -47,12 +47,6 @@ class UserApi(object):
 
             return JsonResponse({}, safe=False)
 
-    def getSession(request):
-        sesion = Session.objects.get(pk=5)
-        print(sesion)
-
-        return JsonResponse({'msg': True})
-
 
 class ModulosUsuarioViewSet(generics.ListAPIView):
     # queryset = Modulo.objects.all()

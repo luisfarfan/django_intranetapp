@@ -72,17 +72,12 @@
     BASE_URL = protocol + '//' + host;
 
     var MODULO_ID = '{{ modulo_id }}'
-    var SIDEBAR_HTML = '{{ sidebar_html }}'
 
 </script>
 
 <!-- /core JS files -->
 {% block js %}
 {% endblock %}
-<script type="text/javascript" src="{% static "assets/js/require.js" %}"></script>
 <script type="text/javascript" src="{% static "src/helpers.js" %}"></script>
-<script>
-    require(['{% static "dist/principal.js" %}']);
-</script>
-
+<script type="text/javascript" src="{% static "assets/js/core/app.min.js" %}"></script>
 </html>

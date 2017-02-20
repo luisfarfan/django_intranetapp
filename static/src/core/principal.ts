@@ -1,6 +1,13 @@
 /**
- * Created by lfarfan on 29/01/2017.
+ * Created by lfarfan on 19/02/2017.
  */
+
+import {MenuHelper, SessionHelper} from '../core/helper.inei'
+var menuHelper = new MenuHelper();
+var sessionHelper = new SessionHelper();
+var sidebar_html = menuHelper.drawSidebar(sessionHelper.getSession().menu);
+$('#__sidebar').html(sidebar_html);
+declare var $: any;
 /* ------------------------------------------------------------------------------
  *
  *  # Template JS core
@@ -91,18 +98,18 @@ $(function () {
     // -------------------------
 
     // Prevent dropdown from closing on click
-    $(document).on('click', '.dropdown-content', function (e) {
+    $(document).on('click', '.dropdown-content', function(e:any) {
         e.stopPropagation();
     });
 
     // Disabled links
-    $('.navbar-nav .disabled a').on('click', function (e) {
+    $('.navbar-nav .disabled a').on('click', function(e:any) {
         e.preventDefault();
         e.stopPropagation();
     });
 
     // Show tabs inside dropdowns
-    $('.dropdown-content a[data-toggle="tab"]').on('click', function (e) {
+    $('.dropdown-content a[data-toggle="tab"]').on('click', function(e:any) {
         $(this).tab('show');
     });
 
@@ -118,7 +125,7 @@ $(function () {
     // -------------------------
 
     // Panels
-    $('.panel [data-action=reload]').click(function (e) {
+    $('.panel [data-action=reload]').click(function(e:any) {
         e.preventDefault();
         var block = $(this).parent().parent().parent().parent().parent();
         $(block).block({
@@ -144,7 +151,7 @@ $(function () {
 
 
     // Sidebar categories
-    $('.category-title [data-action=reload]').click(function (e) {
+    $('.category-title [data-action=reload]').click(function(e:any) {
         e.preventDefault();
         var block = $(this).parent().parent().parent().parent();
         $(block).block({
@@ -171,7 +178,7 @@ $(function () {
 
 
     // Light sidebar categories
-    $('.sidebar-default .category-title [data-action=reload]').click(function (e) {
+    $('.sidebar-default .category-title [data-action=reload]').click(function(e:any) {
         e.preventDefault();
         var block = $(this).parent().parent().parent().parent();
         $(block).block({
@@ -212,7 +219,7 @@ $(function () {
 
 
     // Collapse on click
-    $('.category-title [data-action=collapse]').click(function (e) {
+    $('.category-title [data-action=collapse]').click(function(e:any) {
         e.preventDefault();
         var $categoryCollapse = $(this).parent().parent().parent().nextAll();
         $(this).parents('.category-title').toggleClass('category-collapsed');
@@ -237,7 +244,7 @@ $(function () {
 
 
     // Collapse on click
-    $('.panel [data-action=collapse]').click(function (e) {
+    $('.panel [data-action=collapse]').click(function(e:any) {
         e.preventDefault();
         var $panelCollapse = $(this).parent().parent().parent().parent().nextAll();
         $(this).parents('.panel').toggleClass('panel-collapsed');
@@ -253,7 +260,7 @@ $(function () {
     // -------------------------
 
     // Panels
-    $('.panel [data-action=close]').click(function (e) {
+    $('.panel [data-action=close]').click(function(e:any) {
         e.preventDefault();
         var $panelClose = $(this).parent().parent().parent().parent().parent();
 
@@ -266,7 +273,7 @@ $(function () {
 
 
     // Sidebar categories
-    $('.category-title [data-action=close]').click(function (e) {
+    $('.category-title [data-action=close]').click(function(e:any) {
         e.preventDefault();
         var $categoryClose = $(this).parent().parent().parent().parent();
 
@@ -315,7 +322,7 @@ $(function () {
     // -------------------------
 
     // Main navigation
-    $('.navigation-main').find('li').has('ul').children('a').on('click', function (e) {
+    $('.navigation-main').find('li').has('ul').children('a').on('click', function(e:any) {
         e.preventDefault();
 
         // Collapsible
@@ -329,7 +336,7 @@ $(function () {
 
 
     // Alternate navigation
-    $('.navigation-alt').find('li').has('ul').children('a').on('click', function (e) {
+    $('.navigation-alt').find('li').has('ul').children('a').on('click', function(e:any) {
         e.preventDefault();
 
         // Collapsible
@@ -353,7 +360,7 @@ $(function () {
     // -------------------------
 
     // Toggle mini sidebar
-    $('.sidebar-main-toggle').on('click', function (e) {
+    $('.sidebar-main-toggle').on('click', function(e:any) {
         e.preventDefault();
 
         // Toggle min sidebar class
@@ -365,40 +372,40 @@ $(function () {
     // -------------------------
 
     // Disable click in disabled navigation items
-    $(document).on('click', '.navigation .disabled a', function (e) {
+    $(document).on('click', '.navigation .disabled a', function(e:any) {
         e.preventDefault();
     });
 
 
     // Adjust page height on sidebar control button click
-    $(document).on('click', '.sidebar-control', function (e) {
+    $(document).on('click', '.sidebar-control', function(e:any) {
         containerHeight();
     });
 
 
     // Hide main sidebar in Dual Sidebar
-    $(document).on('click', '.sidebar-main-hide', function (e) {
+    $(document).on('click', '.sidebar-main-hide', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-main-hidden');
     });
 
 
     // Toggle second sidebar in Dual Sidebar
-    $(document).on('click', '.sidebar-secondary-hide', function (e) {
+    $(document).on('click', '.sidebar-secondary-hide', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-secondary-hidden');
     });
 
 
     // Hide detached sidebar
-    $(document).on('click', '.sidebar-detached-hide', function (e) {
+    $(document).on('click', '.sidebar-detached-hide', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-detached-hidden');
     });
 
 
     // Hide all sidebars
-    $(document).on('click', '.sidebar-all-hide', function (e) {
+    $(document).on('click', '.sidebar-all-hide', function(e:any) {
         e.preventDefault();
 
         $('body').toggleClass('sidebar-all-hidden');
@@ -410,7 +417,7 @@ $(function () {
     //
 
     // Collapse main sidebar if opposite sidebar is visible
-    $(document).on('click', '.sidebar-opposite-toggle', function (e) {
+    $(document).on('click', '.sidebar-opposite-toggle', function(e:any) {
         e.preventDefault();
 
         // Opposite sidebar visibility
@@ -434,7 +441,7 @@ $(function () {
 
 
     // Hide main sidebar if opposite sidebar is shown
-    $(document).on('click', '.sidebar-opposite-main-hide', function (e) {
+    $(document).on('click', '.sidebar-opposite-main-hide', function(e:any) {
         e.preventDefault();
 
         // Opposite sidebar visibility
@@ -455,7 +462,7 @@ $(function () {
 
 
     // Hide secondary sidebar if opposite sidebar is shown
-    $(document).on('click', '.sidebar-opposite-secondary-hide', function (e) {
+    $(document).on('click', '.sidebar-opposite-secondary-hide', function(e:any) {
         e.preventDefault();
 
         // Opposite sidebar visibility
@@ -477,7 +484,7 @@ $(function () {
 
 
     // Hide all sidebars if opposite sidebar is shown
-    $(document).on('click', '.sidebar-opposite-hide', function (e) {
+    $(document).on('click', '.sidebar-opposite-hide', function(e:any) {
         e.preventDefault();
 
         // Toggle sidebars visibility
@@ -501,7 +508,7 @@ $(function () {
 
 
     // Keep the width of the main sidebar if opposite sidebar is visible
-    $(document).on('click', '.sidebar-opposite-fix', function (e) {
+    $(document).on('click', '.sidebar-opposite-fix', function(e:any) {
         e.preventDefault();
 
         // Toggle opposite sidebar visibility
@@ -513,28 +520,28 @@ $(function () {
     // -------------------------
 
     // Toggle main sidebar
-    $('.sidebar-mobile-main-toggle').on('click', function (e) {
+    $('.sidebar-mobile-main-toggle').on('click', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-mobile-main').removeClass('sidebar-mobile-secondary sidebar-mobile-opposite sidebar-mobile-detached');
     });
 
 
     // Toggle secondary sidebar
-    $('.sidebar-mobile-secondary-toggle').on('click', function (e) {
+    $('.sidebar-mobile-secondary-toggle').on('click', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-mobile-secondary').removeClass('sidebar-mobile-main sidebar-mobile-opposite sidebar-mobile-detached');
     });
 
 
     // Toggle opposite sidebar
-    $('.sidebar-mobile-opposite-toggle').on('click', function (e) {
+    $('.sidebar-mobile-opposite-toggle').on('click', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-mobile-opposite').removeClass('sidebar-mobile-main sidebar-mobile-secondary sidebar-mobile-detached');
     });
 
 
     // Toggle detached sidebar
-    $('.sidebar-mobile-detached-toggle').on('click', function (e) {
+    $('.sidebar-mobile-detached-toggle').on('click', function(e:any) {
         e.preventDefault();
         $('body').toggleClass('sidebar-mobile-detached').removeClass('sidebar-mobile-main sidebar-mobile-secondary sidebar-mobile-opposite');
     });

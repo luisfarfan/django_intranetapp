@@ -1,20 +1,20 @@
 /**
- * Created by lfarfan on 12/02/2017.
+ * Created by lfarfan on 19/02/2017.
  */
-export default class MenuAplicacionesModel {
-    constructor() {
-        this.url = `${BASEURL}/rest_modulousuario/rol/`;
-        this.url_rol_modulo = `${BASEURL}/rest_modulousuario/modulos_rol/`;
-    }
+declare var BASEURL: any;
+export default class RolesService {
+    private url = `${BASEURL}/rest_modulousuario/rol/`;
+    private url_rol_modulo = `${BASEURL}/rest_modulousuario/modulos_rol/`;
 
-    get(pk = null) {
+
+    get(pk: any = null) {
         return $.ajax({
             url: pk == null ? this.url_rol_modulo : `${this.url_rol_modulo}${pk}/`,
             type: 'GET'
         });
     }
 
-    update(pk, obj) {
+    update(pk: any, obj: Array<Object>) {
         return $.ajax({
             url: `${this.url}${pk}/`,
             type: 'PUT',
@@ -22,7 +22,7 @@ export default class MenuAplicacionesModel {
         });
     }
 
-    add(obj) {
+    add(obj: any) {
         return $.ajax({
             url: `${this.url}`,
             type: 'POST',
@@ -30,7 +30,7 @@ export default class MenuAplicacionesModel {
         });
     }
 
-    delete(pk) {
+    delete(pk: any) {
         return $.ajax({
             url: `${this.url}${pk}/`,
             type: 'DELETE',

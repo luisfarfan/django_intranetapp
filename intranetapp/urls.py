@@ -49,6 +49,7 @@ class DinamicView(View):
 
     def get(self, request):
         template = loader.get_template(self.template_name)
+        request.session['MODULO_ID'] = self.modulo_id
         context = {
             'modulo_id': self.modulo_id,
             'breadcumbs': self.breadcumbs

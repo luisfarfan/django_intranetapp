@@ -36,4 +36,7 @@ export default class RolesModel {
             type: 'DELETE',
         });
     }
+    hola(){
+
+    }
 }

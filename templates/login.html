@@ -116,9 +116,7 @@
     var host = pathArray[2];
     BASEURL = protocol + '//' + host;
 </script>
-<script type="text/javascript" src="{% static "assets/js/require.js" %}"></script>
 <script type="text/javascript" src="{% static "src/helpers.js" %}"></script>
-<script>
-    require(['{% static "dist/login.js" %}']);
-</script>
+<script type="text/javascript" src="{% static "assets/js/require.js" %}"
+        data-main="{% static "build/login/login.js" %}"></script>
 </html>

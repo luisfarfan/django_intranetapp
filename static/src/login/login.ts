@@ -1,10 +1,11 @@
 /**
- * Created by LFarfan on 19/12/2016.
+ * Created by lfarfan on 19/02/2017.
  */
-import {SessionHelper, ObjectHelper} from './core/helper.inei.js';
-import {showDivAlert} from './core/util.inei.js'
+import {SessionHelper, ObjectHelper} from '../core/helper.inei';
+import {showDivAlert} from '../core/utils'
 var sessionHelper = new SessionHelper();
 var objectHelper = new ObjectHelper();
+declare var BASEURL: any;
 $('#iniciar_sesion').on('click', event => {
     "use strict";
     let url = `${BASEURL}/usuario/authentication/`;
